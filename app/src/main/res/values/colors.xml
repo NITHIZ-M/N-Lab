@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Modern Clean Palette -->
+    <!-- Primary Blue -->
+    <color name="primary_blue">#1877F2</color>
+    <!-- Darker Blue for depth -->
+    <color name="primary_dark">#1059B8</color>
+    <!-- Soft Background Gray -->
+    <color name="background_gray">#F7F8FA</color>
+    <!-- Card Surface White -->
+    <color name="surface_white">#FFFFFF</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#1C1E21</color>
+    <color name="text_secondary">#65676B</color>
+    <color name="text_tertiary">#B0B3B8</color>
+    
+    <!-- Accent Colors -->
+    <color name="accent_cyan">#00C9FF</color>
+    <color name="accent_purple">#92FE9D</color> <!-- Soft green/gradient end -->
+    
+    <!-- Status Colors -->
+    <color name="status_error">#FF4D4D</color>
+    <color name="status_success">#4CAF50</color>
+
+    <!-- Theme Attributes Mapped -->
+    <color name="colorPrimary">@color/primary_blue</color>
+    <color name="colorPrimaryVariant">@color/primary_dark</color>
+    <color name="colorOnPrimary">@color/white</color>
+    
+    <color name="colorSecondary">@color/primary_blue</color>
+    <color name="colorSecondaryVariant">@color/primary_dark</color>
+    <color name="colorOnSecondary">@color/white</color>
+
+    <color name="colorBackground">@color/background_gray</color>
+    <color name="colorSurface">@color/surface_white</color>
+    <color name="colorOnSurface">@color/text_primary</color>
+    <color name="colorOnBackground">@color/text_primary</color>
+
+    <!-- Helper aliases -->
+    <color name="primary">@color/primary_blue</color>
+    <color name="background">@color/background_gray</color>
+    <color name="muted_foreground">@color/text_secondary</color>
+    
+    <color name="stroke_color">#E4E6EB</color>
+    <color name="chip_background">#F0F2F5</color>
+    <color name="chip_stroke">#CED0D4</color>
+    <color name="translucent_bg">#80000000</color>
+</resources>

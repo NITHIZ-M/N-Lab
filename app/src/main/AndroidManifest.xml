@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Img2PDF"
+        android:requestLegacyExternalStorage="true"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".ToolsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".ToolListActivity" />
+        <activity android:name=".ImageToolListActivity" />
+        <activity android:name=".DocumentConversionActivity" />
+        <activity android:name=".DocumentConverterActivity" />
+        <activity android:name=".PdfConverterActivity" />
+        <activity android:name=".JpgToPdfActivity" />
+        <activity android:name=".PdfToolsActivity" />
+        <activity android:name=".ResizeImageActivity" />
+        <activity android:name=".CompressImageActivity" />
+        <activity android:name=".RotateImageActivity" />
+        <activity android:name=".ImageConverterActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ImageToPdfActivity" />
+        
+        <!-- Audio Activities -->
+        <activity android:name=".AudioToolsActivity" />
+        <activity android:name=".TrimAudioActivity" />
+        <activity android:name=".VolumeActivity" />
+        <activity android:name=".SpeedActivity" />
+        <activity android:name=".EqualizerActivity" />
+        <activity android:name=".ReverseActivity" />
+        <activity android:name=".JoinerActivity" />
+        
+        <!-- Video Activities -->
+        <activity android:name=".VideoToolsActivity" />
+        <activity android:name=".TrimVideoActivity" />
+        <activity android:name=".MergeVideoActivity" />
+        <activity android:name=".CropVideoActivity" />
+        <activity android:name=".RotateVideoActivity" />
+        <activity android:name=".SpeedVolumeActivity" />
+        <activity android:name=".VideoConverterActivity" />
+        
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+    </application>
+</manifest>

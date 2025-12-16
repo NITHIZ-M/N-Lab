@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Img2PDF" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Dark Theme Attributes -->
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimaryContainer">@color/background_gray</item>
+        <item name="colorOnPrimaryContainer">@color/text_primary</item>
+        
+        <item name="colorSecondary">@color/accent_cyan</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondaryContainer">@color/surface_white</item>
+        <item name="colorOnSecondaryContainer">@color/text_primary</item>
+
+        <item name="android:colorBackground">@color/background_gray</item>
+        <item name="colorSurface">@color/surface_white</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/surface_white</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+
+        <item name="android:statusBarColor">@color/background_gray</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
