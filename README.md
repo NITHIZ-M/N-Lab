@@ -14,10 +14,10 @@
 <div align="center">
   <!-- REPLACE THE LINK BELOW WITH YOUR ICON URL -->
   <a href="#">
-    <img src="https://github.com/NITHISH-GM/N-Lab/blob/1db1e273da2ba4e9665d308292cada58e722afc7/Image/Logo/1000073953.jpg" alt="Nithish App Icon" width="100" height="100">
+    <img src="https://github.com/NITHISH-GM/N-Lab/blob/1db1e273da2ba4e9665d308292cada58e722afc7/Image/Logo/1000073953.jpg" alt="Nithish App Icon" width="100" height="100" border-radius="25px">
   </a>
 
-  <h1 align="center">Img2PDF</h1>
+  <h1 align="center">N-Lab</h1>
 
   <p align="center">
     <b>The Ultimate Native Android Swiss-Army Knife for Media & Docs</b>
