@@ -37,7 +37,7 @@
 
 ### ⚡ System Overview
 
-**Img2PDF** is a high-performance engine built on **Native Android (Kotlin)**. It bridges the gap between static documents and dynamic media, leveraging industry-standard libraries to perform heavy processing directly on the device.
+**N-Lab** is a high-performance engine built on **Native Android (Kotlin)**. It bridges the gap between static documents and dynamic media, leveraging industry-standard libraries to perform heavy processing directly on the device.
 
 > **Current Status:** 🟢 Active Development | **Maintainer:** Nithish
 
@@ -61,8 +61,8 @@ This project leverages a heavy-hitting stack to ensure performance and reliabili
 ### 📸 Interface Preview
 
 <div align="center"> 
-  <img src="https://via.placeholder.com/200x400.png?text=Home+Screen" alt="Home Screen" style="border-radius: 10px; margin: 10px;">
-  <img src="https://via.placeholder.com/200x400.png?text=JPG+Converter" alt="Converter" style="border-radius: 10px; margin: 10px;">
+  <img src="[https://via.placeholder.com/200x400.png?text=Home+Screen](https://github.com/NITHISH-GM/N-Lab/blob/0852d27d797428a160a6b3d59c5b59f8eb1a7b3f/Screenshot_2025-12-16-10-53-18-61.jpg)" alt="Home Screen" style="border-radius: 10px; margin: 10px;">
+  <img src="[https://via.placeholder.com/200x400.png?text=JPG+Converter](https://github.com/NITHISH-GM/N-Lab/blob/master/Screenshot_2025-12-16-10-53-22-76_bb7677d8c70a668a87cc56bfe3d678a6.jpg?raw=true)" alt="Converter" style="border-radius: 10px; margin: 10px;">
   <img src="https://via.placeholder.com/200x400.png?text=PDF+Tools" alt="Editor" style="border-radius: 10px; margin: 10px;">
 </div>
 
