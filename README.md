@@ -12,9 +12,9 @@
 <!-- PROJECT LOGO & TITLE -->
 <br />
 <div align="center">
-  <!-- REPLACE THE LINK BELOW WITH YOUR ICON URL -->
   <a href="#">
-    <img src="[https://github.com/NITHISH-GM/N-Lab/blob/1db1e273da2ba4e9665d308292cada58e722afc7/Image/Logo/1000073953.jpg](https://github.com/NITHISH-GM/N-Lab/blob/c5875532083a7e1cc4adf2a4af8951f2b3eeb151/App-Asset/Icon.jpeg)" alt="Nithish App Icon" width="100" height="100" border-radius="50%">
+    <!-- Use a relative path so GitHub will render the image from this repository -->
+    <img src="App-Asset/App_Logo.jpg" alt="N-Lab Logo" width="120" />
   </a>
 
   <h1 align="center">N-Lab</h1>
@@ -37,7 +37,7 @@
 
 ### ⚡ System Overview
 
-**N-Lab** is a high-performance engine built on **Native Android (Kotlin)**. It bridges the gap between static documents and dynamic media, leveraging industry-standard libraries to perform heavy processing directly on the device.
+**N-Lab** is a high-performance engine built on **Native Android (Kotlin)**. It bridges the gap between static documents and dynamic media, leveraging industry-standard libraries to perform heavy proc[...]
 
 > **Current Status:** 🟢 Active Development | **Maintainer:** Nithish
 
@@ -61,9 +61,10 @@ This project leverages a heavy-hitting stack to ensure performance and reliabili
 ### 📸 Interface Preview
 
 <div align="center"> 
-  <img src="[[https://via.placeholder.com/200x400.png?text=Home+Screen](https://github.com/NITHISH-GM/N-Lab/blob/0852d27d797428a160a6b3d59c5b59f8eb1a7b3f/Screenshot_2025-12-16-10-53-18-61.jpg)](https://github.com/NITHISH-GM/N-Lab/blob/master/App-Asset/Home_page-UI.jpg?raw=true)" alt="Home Screen" style="border-radius: 10px; margin: 10px;">
-  <img src="[[https://via.placeholder.com/200x400.png?text=JPG+Converter](https://github.com/NITHISH-GM/N-Lab/blob/master/Screenshot_2025-12-16-10-53-22-76_bb7677d8c70a668a87cc56bfe3d678a6.jpg?raw=true)](https://github.com/NITHISH-GM/N-Lab/blob/c5875532083a7e1cc4adf2a4af8951f2b3eeb151/App-Asset/Tools_List.jpg)](https://github.com/NITHISH-GM/N-Lab/blob/master/App-Asset/Tools_List.jpg?raw=true)" alt="Converter" style="border-radius: 10px; margin: 10px;">
-  <img src="[https://via.placeholder.com/200x400.png?text=PDF+Tools](https://github.com/NITHISH-GM/N-Lab/blob/master/App-Asset/Editor_view.jpg?raw=true)" alt="Editor" style="border-radius: 10px; margin: 10px;">
+  <!-- Use relative paths (recommended). If you prefer absolute raw URLs, convert to raw.githubusercontent.com or add ?raw=true -->
+  <img src="App-Asset/Home_Page-UI.jpg" alt="Home Screen" width="200" style="border-radius: 10px; margin: 0 8px;" />
+  <img src="App-Asset/Tool_List.jpg" alt="Converter" width="200" style="border-radius: 10px; margin: 0 8px;" />
+  <img src="App-Asset/Editor_view.jpg" alt="Editor" width="200" style="border-radius: 10px; margin: 0 8px;" />
 </div>
 
 ---
