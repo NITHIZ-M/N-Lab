@@ -62,8 +62,8 @@ This project leverages a heavy-hitting stack to ensure performance and reliabili
 
 <div align="center"> 
   <!-- Use relative paths (recommended). If you prefer absolute raw URLs, convert to raw.githubusercontent.com or add ?raw=true -->
-  <img src="App-Asset/Home_Page-UI.jpg" alt="Home Screen" width="200" style="border-radius: 10px; margin: 0 8px;" />
-  <img src="App-Asset/Tool_List.jpg" alt="Converter" width="200" style="border-radius: 10px; margin: 0 8px;" />
+  <img src="App-Asset/Home_page-UI.jpg" alt="Home Screen" width="200" style="border-radius: 10px; margin: 0 8px;" />
+  <img src="App-Asset/Tools_List.jpg" alt="Converter" width="200" style="border-radius: 10px; margin: 0 8px;" />
   <img src="App-Asset/Editor_view.jpg" alt="Editor" width="200" style="border-radius: 10px; margin: 0 8px;" />
 </div>
 
