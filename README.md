@@ -35,15 +35,15 @@
 
 ---
 
-### ⚡ System Overview
+###  System Overview
 
 **N-Lab** is a high-performance engine built on **Native Android (Kotlin)**. It bridges the gap between static documents and dynamic media, leveraging industry-standard libraries to perform heavy proc[...]
 
-> **Current Status:** 🟢 Active Development | **Maintainer:** Nithish
+> **Current Status:**  Active Development | **Maintainer:** Nithish
 
 ---
 
-### 🛠️ The Arsenal (Tech Stack)
+###  The Arsenal (Tech Stack)
 
 This project leverages a heavy-hitting stack to ensure performance and reliability:
 
@@ -58,7 +58,7 @@ This project leverages a heavy-hitting stack to ensure performance and reliabili
 
 ---
 
-### 📸 Interface Preview
+###  Interface Preview
 
 <div align="center"> 
   <img src="App-Asset/Tools_List.jpg" alt="Converter" width="200" style="border-radius: 10px; margin: 0 8px;" />
@@ -67,7 +67,7 @@ This project leverages a heavy-hitting stack to ensure performance and reliabili
 
 ---
 
-### 🚀 Quick Deploy
+###  Quick Deploy
 
 Get this running on your local machine in under 5 minutes.
 
@@ -81,14 +81,14 @@ Get this running on your local machine in under 5 minutes.
 
 ---
 
-### 📂 Architecture Map
+###  Architecture Map
 
 A high-level view of the source tree structure:
 
 
 ---
 
-### 🤝 Contributing
+###  Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -100,7 +100,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 ---
 
-### 📝 License
+###  License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
