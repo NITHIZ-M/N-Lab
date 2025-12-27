@@ -22,29 +22,24 @@
   <p align="center">
     <b>The Ultimate Native Android Swiss-Army Knife for Media & Docs</b>
     <br />
-    <i>Architected by Nithish</i>
+    <i>Architected by NITHISH</i>
     <br />
     <br />
-    <a href="#-demo">View Demo</a>
-    ·
-    <a href="#-bug-report">Report Bug</a>
-    ·
-    <a href="#-feature-request">Request Feature</a>
   </p>
 </div>
 
 ---
 
-###  System Overview
+### System Overview
 
 **N-Lab** is a high-performance engine built on **Native Android (Kotlin)**. It bridges the gap between static documents and dynamic media, leveraging industry-standard libraries to perform heavy proc[...]
 
-> **Current Status:**  Active Development | **Maintainer:** Nithish
+> **Current Status:**  Active Development | **Maintainer:** NITHISH
 
 ---
 
 ###  The Arsenal (Tech Stack)
-
+<div align="center"> 
 This project leverages a heavy-hitting stack to ensure performance and reliability:
 
 | Component | Technology / Library | Capability |
@@ -55,7 +50,7 @@ This project leverages a heavy-hitting stack to ensure performance and reliabili
 | **Visuals** | `Glide` + `UCrop` | High-performance image loading & cropping. |
 | **Docs** | `Apache POI` | Read/Write MS Word & Excel files natively. |
 | **Audio Viz** | `WaveformSeekBar` | Real-time audio spectrum visualization. |
-
+</div>
 ---
 
 ###  Interface Preview
