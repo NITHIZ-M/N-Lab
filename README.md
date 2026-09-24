@@ -1,10 +1,10 @@
 <!-- PROJECT SHIELDS -->
 <div align="center">
 
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.0-7f52ff?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org)
-[![Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
-[![Gradle](https://img.shields.io/badge/Build-Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white)](https://gradle.org)
-[![FFmpeg](https://img.shields.io/badge/Media-RxFFmpeg-00599C?style=for-the-badge&logo=ffmpeg&logoColor=white)](https://ffmpeg.org)
+[![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![Lucide](https://img.shields.io/badge/Icons-Lucide-F59E0B?style=for-the-badge)](https://lucide.dev)
 [![Dev](https://img.shields.io/badge/Developer-Nithish-orange?style=for-the-badge&logo=github)](https://github.com/)
 
 </div>
@@ -13,14 +13,13 @@
 <br />
 <div align="center">
   <a href="#">
-    <!-- Use a relative path so GitHub will render the image from this repository -->
-    <img src="App-Asset/App_Logo.jpg" alt="N-Lab Logo" width="120" />
+    <img src="App-Asset/App_Logo.jpg" alt="N-Lab Logo" width="120" style="border-radius: 20px;" />
   </a>
 
-  <h1 align="center">N-Lab</h1>
+  <h1 align="center">N-Lab Studio</h1>
 
   <p align="center">
-    <b>The Ultimate Native Android Swiss-Army Knife for Media & Docs</b>
+    <b>The Ultimate Client-Side Swiss-Army Knife for Media & Docs</b>
     <br />
     <i>Architected by NITHISH</i>
     <br />
@@ -32,66 +31,58 @@
 
 ### System Overview
 
-**N-Lab** is a high-performance engine built on **Native Android (Kotlin)**. It bridges the gap between static documents and dynamic media, leveraging industry-standard libraries to perform heavy proc[...]
+**N-Lab Studio** is a high-performance, 100% client-side web engine built on **React + TypeScript + Vite**. It provides a comprehensive suite of media and document manipulation tools operating entirely within your web browser using HTML5 Canvas, Web Audio API, and PDF-Lib. Zero data is sent to external servers.
 
-> **Current Status:**  Active Development | **Maintainer:** NITHISH
+> **Current Status:**  Active Web App | **Maintainer:** NITHISH
 
 ---
 
 ###  The Arsenal (Tech Stack)
-<div align="center"> 
-This project leverages a heavy-hitting stack to ensure performance and reliability:
 
-| Component | Technology / Library | Capability |
+<div align="center">
+
+| Component | Technology | Capability |
 | :--- | :--- | :--- |
-| **Core Logic** | `Kotlin + Coroutines` | Asynchronous, non-blocking operations. |
-| **PDF Engine** | `iText7 Core` | Enterprise-grade PDF generation & manipulation. |
-| **Media Core** | `RxFFmpeg` | FFmpeg wrapper for complex Audio/Video processing. |
-| **Visuals** | `Glide` + `UCrop` | High-performance image loading & cropping. |
-| **Docs** | `Apache POI` | Read/Write MS Word & Excel files natively. |
-| **Audio Viz** | `WaveformSeekBar` | Real-time audio spectrum visualization. |
-</div>
----
+| **Framework** | `React 18 + TypeScript` | Type-safe, component-driven UI. |
+| **Bundler** | `Vite 5` | Instant HMR and optimized production bundling. |
+| **PDF Engine** | `pdf-lib` | Client-side PDF generation, watermarking & manipulation. |
+| **Audio Core** | `Web Audio API` | Audio trimming, gain boost, speed shifting & reversing. |
+| **Visuals & Canvas** | `HTML5 Canvas API` | High-performance image resizing, rotation, compression & format conversion. |
+| **Storage** | `IndexedDB & localStorage` | Offline history clipboard and user preference persistence. |
 
-###  Interface Preview
-
-<div align="center"> 
-  <img src="App-Asset/Tools_List.jpg" alt="Converter" width="200" style="border-radius: 10px; margin: 0 8px;" />
-  <img src="App-Asset/Editor_view.jpg" alt="Editor" width="200" style="border-radius: 10px; margin: 0 8px;" />
 </div>
 
 ---
 
-###  Quick Deploy
+### Features
 
-Get this running on your local machine in under 5 minutes.
+- 🖼️ **Image Tools**: Image to PDF, Resize, Compress quality slider, Rotate (90°, 180°, 270°), Convert formats (PNG, JPG, WebP).
+- 📄 **PDF Tools**: Text to PDF generator, Custom text watermarking.
+- 🎵 **Audio Tools**: Trim audio, Volume booster, Speed adjustment, Reverse audio playback, Audio track merger.
+- 🎬 **Video Tools**: Video clip trimmer, Frame rotator, Speed & Volume controls, Transcoder.
+- 🌓 **Themes**: Dark Mode & Light Mode support with glassmorphism UI.
+- 🔒 **100% Private**: Zero cloud uploads. All operations complete inside your browser.
+
+---
+
+### Quick Start
 
 **Prerequisites:**
-*   Android Studio (Hedgehog or later)
-*   JDK 17
-*   Android Device/Emulator (API 24+)
+- Node.js 18+
+- npm 9+
 
-**Terminal Instructions:**
+**Development:**
+```bash
+npm install
+npm run dev
+```
+Open `http://localhost:3000` in your browser.
 
-
----
-
-###  Architecture Map
-
-A high-level view of the source tree structure:
-
-
----
-
-###  Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+**Production Build:**
+```bash
+npm run build
+npm run preview
+```
 
 ---
 
