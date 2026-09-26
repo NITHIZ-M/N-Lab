@@ -443,6 +443,7 @@ export class ImageProcessor {
   private static fileToJpegDataUrl(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const img = new Image();
+      const url = URL.createObjectURL(file);
       img.onload = () => {
         const canvas = document.createElement('canvas');
         canvas.width = img.width;
@@ -451,19 +452,30 @@ export class ImageProcessor {
         ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
         resolve(canvas.toDataURL('image/jpeg', 0.92));
       };
-      img.onerror = reject;
-      img.src = URL.createObjectURL(file);
+      img.onerror = (err) => {
+        URL.revokeObjectURL(url);
+        reject(err);
+      };
+      img.src = url;
     });
   }
 
   private static loadImage(file: File): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = reject;
-      img.src = URL.createObjectURL(file);
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve(img);
+      };
+      img.onerror = (err) => {
+        URL.revokeObjectURL(url);
+        reject(err);
+      };
+      img.src = url;
     });
   }
 

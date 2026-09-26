@@ -21,6 +21,7 @@ import {
   Download,
   RefreshCw,
   AlertCircle,
+  AlertTriangle,
   Copy,
   Eye,
   Sliders,
@@ -34,6 +35,52 @@ import {
   ChevronDown,
   PlusCircle,
 } from 'lucide-react';
+
+const getToolActionSuffix = (tId: string): string => {
+  switch (tId) {
+    case 'img_crop': return 'cropped';
+    case 'img_pdf': return 'pdf';
+    case 'img_resize': return 'resized';
+    case 'img_compress': return 'compressed';
+    case 'img_rotate': return 'rotated';
+    case 'img_convert': return 'converted';
+    case 'img_watermark': return 'watermarked';
+    case 'img_ocr': return 'extracted_text';
+    case 'img_exif': return 'stripped';
+    case 'img_remove_bg': return 'no_bg';
+    case 'pdf_to_img': return 'exported_images';
+    case 'pdf_doc_convert': return 'pdf';
+    case 'pdf_watermark': return 'watermarked';
+    case 'pdf_merge': return 'merged';
+    case 'pdf_split': return 'split';
+    case 'pdf_rotate': return 'rotated';
+    case 'pdf_compress': return 'compressed';
+    case 'pdf_protect': return 'locked';
+    case 'pdf_extract_images': return 'extracted_photos';
+    case 'pdf_meta': return 'edited_meta';
+    case 'audio_trim': return 'trimmed';
+    case 'audio_volume': return 'boosted';
+    case 'audio_speed': return 'speeded';
+    case 'audio_eq': return 'eq_filtered';
+    case 'audio_reverse': return 'reversed';
+    case 'audio_join': return 'merged_audio';
+    case 'audio_convert': return 'converted';
+    case 'audio_compress': return 'compressed';
+    case 'audio_extract_video': return 'soundtrack';
+    case 'audio_tts': return 'speech_synth';
+    case 'video_trim': return 'trimmed';
+    case 'video_merge': return 'merged_video';
+    case 'video_crop': return 'cropped_video';
+    case 'video_rotate': return 'rotated_video';
+    case 'video_speed_vol': return 'adjusted';
+    case 'video_convert': return 'converted';
+    case 'video_compress': return 'compressed';
+    case 'video_frame': return 'captured_frame';
+    case 'video_gif': return 'animated_gif';
+    case 'video_mute': return 'muted_video';
+    default: return 'edited';
+  }
+};
 
 enum Step {
   CONFIGURE,
@@ -92,10 +139,11 @@ export const ToolWorkspaceScreen: React.FC = () => {
   const tool = getToolById(toolId || 'img_pdf');
 
   const [files, setFiles] = useState<File[]>([]);
-  const [outputFileName, setOutputFileName] = useState(`nlab_${toolId || 'output'}_${Math.floor(Date.now() / 1000)}`);
+  const [outputFileName, setOutputFileName] = useState('');
   const [filePreviewUrl, setFilePreviewUrl] = useState<string | null>(null);
   const [showFullPreviewModal, setShowFullPreviewModal] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [warningBanner, setWarningBanner] = useState<{ title: string; text: string; field: string } | null>(null);
 
   // Freehand Crop Modal state
   const [croppingFileIndex, setCroppingFileIndex] = useState<number | null>(null);
@@ -125,6 +173,15 @@ export const ToolWorkspaceScreen: React.FC = () => {
   const [progressStepText, setProgressStepText] = useState('');
   const [outputResult, setOutputResult] = useState<StandardToolOutput | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // Memory Cleanup for Object URLs
+  useEffect(() => {
+    return () => {
+      if (filePreviewUrl) {
+        URL.revokeObjectURL(filePreviewUrl);
+      }
+    };
+  }, [filePreviewUrl]);
 
   useEffect(() => {
     if (location.state && (location.state as any).initialFiles) {
@@ -275,8 +332,82 @@ export const ToolWorkspaceScreen: React.FC = () => {
     setTimeout(() => setCopiedText(false), 2000);
   };
 
-  const handleStartProcessing = async () => {
-    if (tool.id !== 'audio_tts' && files.length === 0) return;
+  const validateWorkspaceInputs = (): { title: string; text: string; field: string } | null => {
+    if (tool.id !== 'audio_tts' && tool.id !== 'doc_qr' && files.length === 0) {
+      return {
+        title: 'No File Uploaded',
+        text: 'Please select at least 1 file to process with this tool.',
+        field: 'files',
+      };
+    }
+
+    if (!outputFileName || outputFileName.trim() === '') {
+      return {
+        title: 'Missing Output File Name',
+        text: 'Please enter a file name (e.g. "yourname") before starting.',
+        field: 'outputFileName',
+      };
+    }
+
+    if (tool.id === 'img_compress' && quality === 100) {
+      return {
+        title: 'Quality Set to 100%',
+        text: 'At 100% quality slider, no image compression or file size reduction will occur. Lower the quality slider (e.g. 70-80%) to compress.',
+        field: 'quality',
+      };
+    }
+
+    if ((tool.id === 'pdf_watermark' || tool.id === 'img_watermark') && (!watermarkText || watermarkText.trim() === '')) {
+      return {
+        title: 'Watermark Text Empty',
+        text: 'Please enter custom text for your watermark stamp.',
+        field: 'watermarkText',
+      };
+    }
+
+    if ((tool.id === 'pdf_merge' || tool.id === 'video_merge' || tool.id === 'audio_join') && files.length < 2) {
+      return {
+        title: 'Merge Requires 2+ Files',
+        text: `You have selected ${files.length} file(s). Please add more files to perform a merge.`,
+        field: 'files',
+      };
+    }
+
+    if (tool.id === 'pdf_split' && startPage >= endPage) {
+      return {
+        title: 'Invalid Split Page Range',
+        text: `Start page (${startPage}) must be strictly smaller than end page (${endPage}).`,
+        field: 'pages',
+      };
+    }
+
+    if (tool.id === 'audio_tts' && (!ttsText || ttsText.trim() === '')) {
+      return {
+        title: 'Text Prompt Required',
+        text: 'Please enter text to synthesize into spoken audio speech.',
+        field: 'ttsText',
+      };
+    }
+
+    return null;
+  };
+
+  const handleStartProcessing = async (forceProceed = false) => {
+    if (!forceProceed) {
+      const warning = validateWorkspaceInputs();
+      if (warning) {
+        setWarningBanner(warning);
+        showToast(`⚠️ ${warning.title}: ${warning.text}`);
+        return;
+      }
+    }
+    setWarningBanner(null);
+
+    const effectiveOutputName = outputFileName.trim() !== ''
+      ? outputFileName.trim()
+      : (files.length > 0
+          ? `${files[0].name.replace(/\.[^/.]+$/, '')}_${getToolActionSuffix(tool.id)}`
+          : `nlab_${tool.id}_${getToolActionSuffix(tool.id)}`);
 
     setStep(Step.PROCESSING);
     setProgressPct(5);
@@ -286,7 +417,7 @@ export const ToolWorkspaceScreen: React.FC = () => {
     const inputData = {
       toolId: tool.id,
       files,
-      outputFileName,
+      outputFileName: effectiveOutputName,
       params: {
         orientation,
         margin,
@@ -638,8 +769,9 @@ export const ToolWorkspaceScreen: React.FC = () => {
               <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--text-primary)' }}>TOOL PARAMETERS & OPTIONS</span>
             </div>
 
-            <div>
-              <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '6px' }}>
+            {/* CLEAN OUTPUT FILENAME INPUT */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>
                 OUTPUT FILE NAME
               </label>
               <input
@@ -649,10 +781,14 @@ export const ToolWorkspaceScreen: React.FC = () => {
                   background: 'var(--bg-tertiary)',
                   padding: '10px 14px',
                   borderRadius: 'var(--radius-sm)',
-                  border: '1px solid var(--border-color)',
+                  border: warningBanner?.field === 'outputFileName' ? '1px solid var(--accent-warning)' : '1px solid var(--border-color)',
                 }}
+                placeholder="yourname"
                 value={outputFileName}
-                onChange={(e) => setOutputFileName(e.target.value)}
+                onChange={(e) => {
+                  setOutputFileName(e.target.value);
+                  setWarningBanner(null);
+                }}
               />
             </div>
 
@@ -669,6 +805,7 @@ export const ToolWorkspaceScreen: React.FC = () => {
                   onRangeChange={(start, end) => {
                     setStartTime(start);
                     setEndTime(end);
+                    setWarningBanner(null);
                   }}
                 />
               </div>
@@ -686,12 +823,15 @@ export const ToolWorkspaceScreen: React.FC = () => {
                     background: 'var(--bg-tertiary)',
                     padding: '10px 14px',
                     borderRadius: 'var(--radius-sm)',
-                    border: '1px solid var(--border-color)',
+                    border: warningBanner?.field === 'ttsText' ? '1px solid var(--accent-warning)' : '1px solid var(--border-color)',
                     minHeight: '80px',
                     resize: 'vertical',
                   }}
                   value={ttsText}
-                  onChange={(e) => setTtsText(e.target.value)}
+                  onChange={(e) => {
+                    setTtsText(e.target.value);
+                    setWarningBanner(null);
+                  }}
                 />
               </div>
             )}
@@ -723,7 +863,10 @@ export const ToolWorkspaceScreen: React.FC = () => {
                   <input
                     type="number"
                     value={width}
-                    onChange={(e) => setWidth(Number(e.target.value))}
+                    onChange={(e) => {
+                      setWidth(Number(e.target.value));
+                      setWarningBanner(null);
+                    }}
                     className="search-input"
                     style={{ background: 'var(--bg-tertiary)', padding: '8px 12px', borderRadius: 'var(--radius-sm)' }}
                   />
@@ -735,7 +878,10 @@ export const ToolWorkspaceScreen: React.FC = () => {
                   <input
                     type="number"
                     value={height}
-                    onChange={(e) => setHeight(Number(e.target.value))}
+                    onChange={(e) => {
+                      setHeight(Number(e.target.value));
+                      setWarningBanner(null);
+                    }}
                     className="search-input"
                     style={{ background: 'var(--bg-tertiary)', padding: '8px 12px', borderRadius: 'var(--radius-sm)' }}
                   />
@@ -756,7 +902,10 @@ export const ToolWorkspaceScreen: React.FC = () => {
                     { label: '270° CW', value: '270' },
                   ]}
                   selectedValue={String(degrees)}
-                  onChange={(val) => setDegrees(Number(val))}
+                  onChange={(val) => {
+                    setDegrees(Number(val));
+                    setWarningBanner(null);
+                  }}
                 />
               </div>
             )}
@@ -790,7 +939,10 @@ export const ToolWorkspaceScreen: React.FC = () => {
                   min="10"
                   max="100"
                   value={quality}
-                  onChange={(e) => setQuality(Number(e.target.value))}
+                  onChange={(e) => {
+                    setQuality(Number(e.target.value));
+                    setWarningBanner(null);
+                  }}
                   style={{ width: '100%', accentColor: 'var(--accent-primary)' }}
                 />
               </div>
@@ -809,10 +961,13 @@ export const ToolWorkspaceScreen: React.FC = () => {
                     background: 'var(--bg-tertiary)',
                     padding: '10px 14px',
                     borderRadius: 'var(--radius-sm)',
-                    border: '1px solid var(--border-color)',
+                    border: warningBanner?.field === 'watermarkText' ? '1px solid var(--accent-warning)' : '1px solid var(--border-color)',
                   }}
                   value={watermarkText}
-                  onChange={(e) => setWatermarkText(e.target.value)}
+                  onChange={(e) => {
+                    setWatermarkText(e.target.value);
+                    setWarningBanner(null);
+                  }}
                 />
               </div>
             )}
@@ -828,7 +983,10 @@ export const ToolWorkspaceScreen: React.FC = () => {
                     type="number"
                     min="1"
                     value={startPage}
-                    onChange={(e) => setStartPage(Number(e.target.value))}
+                    onChange={(e) => {
+                      setStartPage(Number(e.target.value));
+                      setWarningBanner(null);
+                    }}
                     className="search-input"
                     style={{ background: 'var(--bg-tertiary)', padding: '8px 12px', borderRadius: 'var(--radius-sm)' }}
                   />
@@ -841,7 +999,10 @@ export const ToolWorkspaceScreen: React.FC = () => {
                     type="number"
                     min={startPage}
                     value={endPage}
-                    onChange={(e) => setEndPage(Number(e.target.value))}
+                    onChange={(e) => {
+                      setEndPage(Number(e.target.value));
+                      setWarningBanner(null);
+                    }}
                     className="search-input"
                     style={{ background: 'var(--bg-tertiary)', padding: '8px 12px', borderRadius: 'var(--radius-sm)' }}
                   />
@@ -850,10 +1011,63 @@ export const ToolWorkspaceScreen: React.FC = () => {
             )}
           </div>
 
+          {/* WARNING ALERT BANNER */}
+          {warningBanner && (
+            <div
+              style={{
+                padding: '14px 16px',
+                borderRadius: 'var(--radius-md)',
+                background: 'rgba(245, 158, 11, 0.14)',
+                border: '1px solid var(--accent-warning)',
+                color: 'var(--accent-warning)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                marginTop: '8px',
+              }}
+              className="animate-fade-in"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <AlertTriangle size={20} style={{ flexShrink: 0 }} />
+                <span style={{ fontSize: '14px', fontWeight: 800 }}>⚠️ {warningBanner.title}</span>
+              </div>
+              <p style={{ fontSize: '12px', color: 'var(--text-primary)', lineHeight: 1.4 }}>
+                {warningBanner.text}
+              </p>
+              <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+                <button
+                  className="btn-secondary"
+                  onClick={() => setWarningBanner(null)}
+                  style={{
+                    padding: '6px 14px',
+                    fontSize: '11px',
+                    borderColor: 'var(--accent-warning)',
+                    color: 'var(--accent-warning)',
+                    background: 'transparent',
+                  }}
+                >
+                  Adjust Parameters
+                </button>
+                <button
+                  className="btn-primary"
+                  onClick={() => handleStartProcessing(true)}
+                  style={{
+                    padding: '6px 14px',
+                    fontSize: '11px',
+                    width: 'auto',
+                    background: 'var(--accent-warning)',
+                    color: '#000000',
+                  }}
+                >
+                  Proceed Anyway
+                </button>
+              </div>
+            </div>
+          )}
+
           <button
             className="btn-primary"
-            disabled={tool.id !== 'audio_tts' && files.length === 0}
-            onClick={handleStartProcessing}
+            onClick={() => handleStartProcessing(false)}
             style={{ marginTop: '8px' }}
           >
             <span>START PROCESSING ({files.length} {files.length === 1 ? 'FILE' : 'FILES'})</span>

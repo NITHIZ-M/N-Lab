@@ -32,7 +32,7 @@ export const ToolRow: React.FC<ToolRowProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '14px 16px',
+        padding: '12px 14px',
         background: 'var(--surface-card)',
         border: '1px solid var(--border-color)',
         borderRadius: 'var(--radius-md)',
@@ -41,11 +41,11 @@ export const ToolRow: React.FC<ToolRowProps> = ({
         gap: '12px',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
         <div
           style={{
-            width: '42px',
-            height: '42px',
+            width: '40px',
+            height: '40px',
             borderRadius: 'var(--radius-md)',
             background: catInfo.badgeBg,
             color: catInfo.textColor,
@@ -57,9 +57,20 @@ export const ToolRow: React.FC<ToolRowProps> = ({
         >
           <IconComponent size={20} />
         </div>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>{title}</span>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'nowrap' }}>
+            <span
+              style={{
+                fontSize: '14px',
+                fontWeight: 700,
+                color: 'var(--text-primary)',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {title}
+            </span>
             <span
               style={{
                 fontSize: '9px',
@@ -69,12 +80,27 @@ export const ToolRow: React.FC<ToolRowProps> = ({
                 background: catInfo.badgeBg,
                 color: catInfo.textColor,
                 letterSpacing: '0.6px',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+                display: 'inline-flex',
+                alignItems: 'center',
+                height: '18px',
               }}
             >
               {category}
             </span>
           </div>
-          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px', lineHeight: 1.3 }}>
+          <p
+            style={{
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              marginTop: '2px',
+              lineHeight: 1.3,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
             {description}
           </p>
         </div>
@@ -91,8 +117,14 @@ export const ToolRow: React.FC<ToolRowProps> = ({
             border: 'none',
             color: isFavorite ? 'var(--accent-warning)' : 'var(--text-muted)',
             cursor: 'pointer',
-            padding: '4px',
+            padding: '6px',
+            borderRadius: 'var(--radius-pill)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
           }}
+          title={isFavorite ? 'Unstar tool' : 'Star favorite tool'}
         >
           <Icons.Star size={18} fill={isFavorite ? 'var(--accent-warning)' : 'none'} />
         </button>

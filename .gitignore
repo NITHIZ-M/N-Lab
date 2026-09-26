@@ -1,16 +1,37 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-electron/
+out/
+build/
+*.apk
+*.aab
+
+# Android build & local configs
+.gradle/
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
+android/captures/
+.externalNativeBuild/
+.cxx/
 local.properties
-node_modules
+*.iml
+
+# Security & Private Keys (NEVER commit signing keys)
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+
+# IDE & System Files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+

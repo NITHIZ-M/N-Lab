@@ -4,19 +4,121 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/jpeg" href="/App_Logo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <meta name="theme-color" content="#090D16" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="description" content="N-Lab - Ultimate Client-Side Swiss-Army Knife for Media & Docs" />
-    <title>N-Lab</title>
+    <title>N-Lab Studio</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        background-color: #ffffff !important;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+      #root {
+        width: 100%;
+        min-height: 100%;
+        background-color: #ffffff;
+      }
+      .init-launch-screen {
+        position: fixed;
+        inset: 0;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      }
+      .init-logo {
+        width: 90px;
+        height: 90px;
+        border-radius: 24px;
+        object-fit: cover;
+        box-shadow: 0 12px 32px rgba(79, 70, 229, 0.25), 0 4px 12px rgba(0, 0, 0, 0.08);
+        animation: logoZoomIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .init-title {
+        margin-top: 18px;
+        font-size: 24px;
+        font-weight: 800;
+        color: #0F172A;
+        letter-spacing: -0.5px;
+        animation: fadeInText 0.8s ease forwards;
+      }
+      .init-sub {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: #6366F1;
+        margin-top: 4px;
+        text-transform: uppercase;
+      }
+      .init-loader {
+        margin-top: 24px;
+        width: 48px;
+        height: 4px;
+        background: #E2E8F0;
+        border-radius: 9999px;
+        position: relative;
+        overflow: hidden;
+      }
+      .init-loader::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, #4F46E5, #0284C7);
+        border-radius: 9999px;
+        animation: loaderSlide 1.2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      @keyframes logoZoomIn {
+        0% {
+          transform: scale(0.4);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.08);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes fadeInText {
+        0% { opacity: 0; transform: translateY(8px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes loaderSlide {
+        0% { left: -100%; }
+        50% { left: 0%; }
+        100% { left: 100%; }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="init-launch-screen">
+        <img src="/App_Logo.jpg" alt="N-Lab" class="init-logo" />
+        <div class="init-title">N-Lab Studio</div>
+        <div class="init-sub">Client Media Toolkit</div>
+        <div class="init-loader"></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -25,7 +25,7 @@ export const AppTopBar: React.FC<AppTopBarProps> = ({ themeMode, onToggleTheme }
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span className="brand-title">N-Lab</span>
-            <span className="brand-subtitle">v2.0.1</span>
+            <span className="brand-subtitle">v2.1.1</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
             <ShieldCheck size={12} style={{ color: 'var(--accent-success)' }} />

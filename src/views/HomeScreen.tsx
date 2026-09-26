@@ -7,17 +7,20 @@ import { FileRow } from '../components/common/FileRow';
 import { ALL_TOOLS } from '../data/toolRegistry';
 import { StorageService } from '../services/storageService';
 import { HistoryItem } from '../types';
-import { ArrowRight, Inbox, Sparkles, Cpu } from 'lucide-react';
+import { ArrowRight, Inbox, Sparkles, Cpu, Star } from 'lucide-react';
 
 export const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
     setHistory(StorageService.getHistory());
+    setFavorites(StorageService.getFavorites());
   }, []);
 
   const pinnedTools = ALL_TOOLS.filter((t) => t.isPinnedToHome);
+  const favoriteTools = ALL_TOOLS.filter((t) => favorites.includes(t.id));
 
   const handleFileSelect = (files: FileList) => {
     if (files.length > 0) {
@@ -72,6 +75,34 @@ export const HomeScreen: React.FC = () => {
           100% PRIVATE
         </span>
       </div>
+
+      {/* Persistent Favorites Grid */}
+      {favoriteTools.length > 0 && (
+        <div>
+          <SectionHeader
+            title="Starred Favorites"
+            actionText="MANAGE"
+            onActionClick={() => navigate('/tools')}
+          />
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '12px',
+            }}
+          >
+            {favoriteTools.map((tool) => (
+              <ToolTile
+                key={`home_fav_${tool.id}`}
+                title={tool.name}
+                category={tool.category}
+                iconName={tool.iconName}
+                onClick={() => navigate(`/workspace/${tool.id}`)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Recent History Clipboard */}
       <div>
@@ -156,8 +187,9 @@ export const HomeScreen: React.FC = () => {
       </div>
 
       <div style={{ textAlign: 'center', padding: '12px 0', fontSize: '10px', fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px' }}>
-        N-LAB V2.0.1 • REACT CLIENT-SIDE ENGINE
+        N-LAB V2.1.1 • REACT CLIENT-SIDE ENGINE
       </div>
     </div>
   );
 };
+

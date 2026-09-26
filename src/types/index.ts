@@ -50,6 +50,11 @@ export interface UserPreferences {
   autoSaveHistory: boolean;
   compressionQuality: number;
   defaultOutputFormat: string;
+  favoriteToolIds: string[];
+  namingPattern: string;
+  showSkeletonName: boolean;
+  pdfCompression: 'low' | 'medium' | 'high';
+  autoDownloadOnProcess: boolean;
 }
 
 export interface StandardToolInput {
